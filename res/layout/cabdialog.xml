@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/tVCameo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    
+    <Button 
+        android:id="@+id/bCameo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nazovi cameo"/>
+    
+    <TextView 
+        android:id="@+id/tVRadioTaxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    
+    <Button 
+        android:id="@+id/bRadioTaxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nazovi radio taxi"/> 
+        
+    <TextView 
+        android:id="@+id/tVEcoTaxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    
+    <Button 
+        android:id="@+id/bEcoTaxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nazovi Eco taxi"/> 
+        
+    <Button 
+        android:id="@+id/bCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return"/> 
+
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lineLayout"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/tVEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EVENTI"
+            android:layout_gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <View
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#ff33b5e5"/>
+        
+        <ListView
+            android:id="@+id/lVEventName"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lineLayout"
+            android:layout_above="@+id/bottomLayout1" >
+
+    <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#ff33b5e5"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/bottomLayout2"
+        android:weightSum="100.0" >
+
+        <Button
+            android:id="@+id/bCallCab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:text="Nazovi taxi" />
+
+        <Button
+            android:id="@+id/bShowOnMap"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:scrollbars="horizontal"
+            android:text="Lokacija" />
+        
+    </LinearLayout>
+        
+    <LinearLayout 
+        android:id="@+id/bottomLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+        
+        <Button
+            android:id="@+id/bClubsPage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Prikazi web stranicu kluba" />
+        
+    </LinearLayout>
+
+</RelativeLayout>
