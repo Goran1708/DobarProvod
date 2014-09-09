@@ -81,12 +81,12 @@ public class ClubInformation extends Activity implements OnClickListener {
 		switch (view.getId()) {
 		case R.id.bCallCab:
 			final Dialog dialog = new Dialog(ClubInformation.this);
-			// Include dialog.xml file
+			// Include cabdialog.xml file
 			dialog.setContentView(R.layout.cabdialog);
 			// Set dialog title
 			dialog.setTitle("Nazovi taxi");
 
-			// set values for custom dialog components - text, image and button
+			// set values for custom dialog components - text and button
 			TextView tvCameo = (TextView) dialog.findViewById(R.id.tVCameo);
 			tvCameo.setText("Cameo: 6kn/km");
 
