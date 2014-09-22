@@ -117,7 +117,7 @@ public class ClubInformation extends Activity implements OnClickListener {
 			
 			TextView tvEcoTaxi = (TextView) dialog
 					.findViewById(R.id.tVEcoTaxi);
-			tvEcoTaxi.setText("Radio Taxi: 5,50kn/km");
+			tvEcoTaxi.setText("Eco Taxi: 5,50kn/km");
 
 			Button callEcoTaxi = (Button) dialog
 					.findViewById(R.id.bEcoTaxi);

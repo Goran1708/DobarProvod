@@ -15,7 +15,7 @@
             android:id="@+id/tVEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EVENTI"
+            android:text="PROGRAM"
             android:layout_gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -61,13 +61,23 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="50"
-            android:text="Nazovi taxi" />
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:text="Nazovi taksi" />
 
         <Button
             android:id="@+id/bShowOnMap"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="50"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:scrollbars="horizontal"
             android:text="Lokacija" />
         
@@ -84,7 +94,12 @@
             android:id="@+id/bClubsPage"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Prikazi web stranicu kluba" />
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:text="Prikaži web stranicu kluba" />
         
     </LinearLayout>
 

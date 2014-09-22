@@ -45,9 +45,9 @@ public class MainActivity extends ActionBarActivity {
 		typeOfMusic = (TabHost) findViewById(android.R.id.tabhost);
 		typeOfMusic.setup();
 
-		TabSpec specs = typeOfMusic.newTabSpec("Domestic music");
+		TabSpec specs = typeOfMusic.newTabSpec("Domaæa glazba");
 		specs.setContent(R.id.tab1);
-		specs.setIndicator("Domestic music");
+		specs.setIndicator("Domaæa glazba");
 		typeOfMusic.addTab(specs);
 		listOfDomesticClubs = (ListView) findViewById(R.id.lVDomesticClubs);
 		domesticClubAdapter = new ArrayAdapter<String>(this,
@@ -64,9 +64,9 @@ public class MainActivity extends ActionBarActivity {
 					}
 				});
 
-		specs = typeOfMusic.newTabSpec("Alternative music");
+		specs = typeOfMusic.newTabSpec("Alternativna glazba");
 		specs.setContent(R.id.tab2);
-		specs.setIndicator("Alternative music");
+		specs.setIndicator("Alternativna glazba");
 		typeOfMusic.addTab(specs);
 		listOfAlternativeClubs = (ListView) findViewById(R.id.lVAlternativeClubs);
 		alternativeClubAdapter = new ArrayAdapter<String>(this,
@@ -84,9 +84,9 @@ public class MainActivity extends ActionBarActivity {
 					}
 				});
 
-		specs = typeOfMusic.newTabSpec("Foreign music");
+		specs = typeOfMusic.newTabSpec("Strana glazba");
 		specs.setContent(R.id.tab3);
-		specs.setIndicator("Foreign music");
+		specs.setIndicator("Strana glazba");
 		typeOfMusic.addTab(specs);
 		listOfForeignClubs = (ListView) findViewById(R.id.lVTechnoClubs);
 		foreignClubAdapter = new ArrayAdapter<String>(this,

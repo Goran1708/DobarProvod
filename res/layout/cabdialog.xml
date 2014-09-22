@@ -14,7 +14,12 @@
         android:id="@+id/bCameo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nazovi cameo"/>
+        android:background="@drawable/custom_button"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:text="Nazovi Cameo taxi"/>
     
     <TextView 
         android:id="@+id/tVRadioTaxi"
@@ -26,7 +31,12 @@
         android:id="@+id/bRadioTaxi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nazovi radio taxi"/> 
+        android:background="@drawable/custom_button"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:text="Nazovi Radio taxi"/> 
         
     <TextView 
         android:id="@+id/tVEcoTaxi"
@@ -38,12 +48,22 @@
         android:id="@+id/bEcoTaxi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:text="Nazovi Eco taxi"/> 
         
     <Button 
         android:id="@+id/bCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Return"/> 
+        android:background="@drawable/custom_button"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:text="Povratak"/> 
 
 </LinearLayout>
