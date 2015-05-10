@@ -1,16 +1,16 @@
 package com.example.dobarprovod;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 @SuppressLint({ "NewApi", "SetJavaScriptEnabled" })
-public class ClubPage extends Activity {
+public class ClubPage extends ActionBarActivity {
 	
 	static String clubName;
 	WebView clubPage;
@@ -26,7 +26,7 @@ public class ClubPage extends Activity {
 		}
 		setTitle(clubName);
 		initializeVariables();
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 	

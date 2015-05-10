@@ -8,15 +8,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class Location extends Activity {
+public class Location extends ActionBarActivity {
 	
 	String clubName;
 	private GoogleMap googleMap;
@@ -37,7 +37,7 @@ public class Location extends Activity {
 			clubName = getIntent().getExtras().getString("clubName");
 		}
 		setTitle(clubName);
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		try {
             // Loading map

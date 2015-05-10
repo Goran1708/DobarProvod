@@ -18,12 +18,8 @@ import android.widget.TabHost.TabSpec;
 public class MainActivity extends ActionBarActivity {
 
 	TabHost typeOfMusic;
-	ListView listOfDomesticClubs;
-	ListView listOfAlternativeClubs;
-	ListView listOfForeignClubs;
-	ArrayAdapter<String> domesticClubAdapter;
-	ArrayAdapter<String> alternativeClubAdapter;
-	ArrayAdapter<String> foreignClubAdapter;
+	ListView listOfDomesticClubs, listOfAlternativeClubs, listOfForeignClubs;
+	ArrayAdapter<String> domesticClubAdapter, alternativeClubAdapter, foreignClubAdapter;
 	static List<String> domesticClubs = new ArrayList<String>();
 	static List<String> alternativeClubs = new ArrayList<String>();
 	static List<String> foreignClubs = new ArrayList<String>();
@@ -42,6 +38,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void initializeVariables() {
+		
 		typeOfMusic = (TabHost) findViewById(android.R.id.tabhost);
 		typeOfMusic.setup();
 
@@ -50,15 +47,12 @@ public class MainActivity extends ActionBarActivity {
 		specs.setIndicator("Domestic music");
 		typeOfMusic.addTab(specs);
 		listOfDomesticClubs = (ListView) findViewById(R.id.lVDomesticClubs);
-		domesticClubAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, domesticClubs);
+		domesticClubAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, domesticClubs);
 
 		listOfDomesticClubs
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					public void onItemClick(AdapterView<?> adapterView,
-							View view, int i, long id) {
-						Intent localIntent = new Intent(MainActivity.this,
-								ClubInformation.class);
+					public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+						Intent localIntent = new Intent(MainActivity.this, ClubInformation.class);
 						localIntent.putExtra("clubName", domesticClubs.get(i));
 						startActivity(localIntent);
 						finish();
@@ -70,17 +64,13 @@ public class MainActivity extends ActionBarActivity {
 		specs.setIndicator("Alternative music");
 		typeOfMusic.addTab(specs);
 		listOfAlternativeClubs = (ListView) findViewById(R.id.lVAlternativeClubs);
-		alternativeClubAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, alternativeClubs);
+		alternativeClubAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alternativeClubs);
 
 		listOfAlternativeClubs
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					public void onItemClick(AdapterView<?> adapterView,
-							View view, int i, long id) {
-						Intent localIntent = new Intent(MainActivity.this,
-								ClubInformation.class);
-						localIntent.putExtra("clubName",
-								alternativeClubs.get(i));
+					public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+						Intent localIntent = new Intent(MainActivity.this, ClubInformation.class);
+						localIntent.putExtra("clubName", alternativeClubs.get(i));
 						startActivity(localIntent);
 						finish();
 					}
@@ -91,15 +81,12 @@ public class MainActivity extends ActionBarActivity {
 		specs.setIndicator("Foreign music");
 		typeOfMusic.addTab(specs);
 		listOfForeignClubs = (ListView) findViewById(R.id.lVTechnoClubs);
-		foreignClubAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, foreignClubs);
+		foreignClubAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foreignClubs);
 
 		listOfForeignClubs
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					public void onItemClick(AdapterView<?> adapterView,
-							View view, int i, long id) {
-						Intent localIntent = new Intent(MainActivity.this,
-								ClubInformation.class);
+					public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+						Intent localIntent = new Intent(MainActivity.this, ClubInformation.class);
 						localIntent.putExtra("clubName", foreignClubs.get(i));		
 						startActivity(localIntent);
 						finish();

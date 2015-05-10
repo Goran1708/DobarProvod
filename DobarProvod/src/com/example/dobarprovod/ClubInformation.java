@@ -10,14 +10,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 @SuppressLint({ "NewApi", "SimpleDateFormat" })
-public class ClubInformation extends Activity implements OnClickListener {
+public class ClubInformation extends ActionBarActivity implements OnClickListener {
 
 	static String clubName;
 	String urlGalery = "http://gallery.hr/upcoming-events/";
@@ -45,7 +45,6 @@ public class ClubInformation extends Activity implements OnClickListener {
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.clubinformation);
 		if (getIntent().getExtras() != null) {
@@ -53,7 +52,7 @@ public class ClubInformation extends Activity implements OnClickListener {
 		}
 		setTitle(clubName);
 		intializeVariables();
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		new Events().execute();
 	}
@@ -133,14 +132,12 @@ public class ClubInformation extends Activity implements OnClickListener {
 			dialog.show();
 			break;
 		case R.id.bShowOnMap:
-			Intent localIntent = new Intent(ClubInformation.this,
-					Location.class);
+			Intent localIntent = new Intent(ClubInformation.this, Location.class);
 			localIntent.putExtra("clubName", clubName);
 			startActivity(localIntent);
 			break;
 		case R.id.bClubsPage:
-			Intent localIntent2 = new Intent(ClubInformation.this,
-					ClubPage.class);
+			Intent localIntent2 = new Intent(ClubInformation.this, ClubPage.class);
 			localIntent2.putExtra("clubName", clubName);
 			startActivity(localIntent2);
 			break;
