@@ -2,7 +2,9 @@ package com.example.dobarprovod;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,12 +32,7 @@ import android.widget.TextView;
 public class ClubInformation extends ActionBarActivity implements OnClickListener {
 
 	static String clubName;
-	String urlGalery = "http://gallery.hr/upcoming-events/";
-	String urlLemon = "http://lemon.hr/hr/";
-	String urlHard_Place = "http://www.hardplace.hr/";
-	String urlKSET = "https://www.kset.org/arhiva/dogadaji/";
-	String urlPlaza_Bar = "http://www.plazabar.hr/program";
-	String urlAquarius = "http://www.aquarius.hr/program/";
+	static Map<String, String> mapOfClubUrls = new HashMap<String, String>();
 	List<String> clubEventList = new ArrayList<String>();
 	ListView eventName;
 	ArrayAdapter<String> eventNameAdapter;
@@ -49,14 +46,18 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 		setContentView(R.layout.clubinformation);
 		if (getIntent().getExtras() != null) {
 			clubName = getIntent().getExtras().getString("clubName");
+			setTitle(clubName);
 		}
-		setTitle(clubName);
+		populateMapOfClubURls();
 		intializeVariables();
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		new Events().execute();
 	}
 
+	/**
+	 * Maps all views and buttons to their xml ID.
+	 */
 	private void intializeVariables() {
 		eventName = (ListView) findViewById(R.id.lVEventName);
 		callCab = (Button) findViewById(R.id.bCallCab);
@@ -68,68 +69,16 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 
 	}
 
+	/**
+	 * On click listener for all buttons in activity.
+	 */
 	public void onClick(View view) {
+
+		Intent callIntentForCabs = new Intent(Intent.ACTION_CALL);
+
 		switch (view.getId()) {
 		case R.id.bCallCab:
-			final Dialog dialog = new Dialog(ClubInformation.this);
-			// Include cabdialog.xml file
-			dialog.setContentView(R.layout.cabdialog);
-			// Set dialog title
-			dialog.setTitle("Nazovi taxi");
-
-			// set values for custom dialog components - text and button
-			TextView tvCameo = (TextView) dialog.findViewById(R.id.tVCameo);
-			tvCameo.setText("Cameo: 6kn/km");
-
-			Button callCameo = (Button) dialog.findViewById(R.id.bCameo);
-			callCameo.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent callIntent = new Intent(Intent.ACTION_CALL);
-					callIntent.setData(Uri.parse("tel:1245"));
-					startActivity(callIntent);
-				}
-			});
-
-			TextView tvRadioTaxi = (TextView) dialog
-					.findViewById(R.id.tVRadioTaxi);
-			tvRadioTaxi.setText("Radio Taxi: 4,90kn/km");
-
-			Button callRadioTaxi = (Button) dialog
-					.findViewById(R.id.bRadioTaxi);
-			callRadioTaxi.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent callIntent = new Intent(Intent.ACTION_CALL);
-					callIntent.setData(Uri.parse("tel:123456"));
-					startActivity(callIntent);
-				}
-			});
-			
-			TextView tvEcoTaxi = (TextView) dialog
-					.findViewById(R.id.tVEcoTaxi);
-			tvEcoTaxi.setText("Radio Taxi: 5,50kn/km");
-
-			Button callEcoTaxi = (Button) dialog
-					.findViewById(R.id.bEcoTaxi);
-			callEcoTaxi.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent callIntent = new Intent(Intent.ACTION_CALL);
-					callIntent.setData(Uri.parse("tel:1234"));
-					startActivity(callIntent);
-				}
-			});
-
-			Button cancel = (Button) dialog.findViewById(R.id.bCancel);
-			cancel.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dialog.cancel();
-				}
-			});
-
-			dialog.show();
+			createDialogForCabs();
 			break;
 		case R.id.bShowOnMap:
 			Intent localIntent = new Intent(ClubInformation.this, Location.class);
@@ -141,17 +90,113 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 			localIntent2.putExtra("clubName", clubName);
 			startActivity(localIntent2);
 			break;
+		case R.id.bCameo:
+			callIntentForCabs.setData(Uri.parse("tel:1245"));
+			startActivity(callIntentForCabs);
+			break;
+		case R.id.bRadioTaxi:
+			callIntentForCabs.setData(Uri.parse("tel:123456"));
+			startActivity(callIntentForCabs);
+			break;
+		case R.id.bEcoTaxi:
+			callIntentForCabs.setData(Uri.parse("tel:1234"));
+			startActivity(callIntentForCabs);
+			break;
 		}
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent localIntent = new Intent(ClubInformation.this,
-				MainActivity.class);
+		Intent localIntent = new Intent(ClubInformation.this, MainActivity.class);
 		localIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(localIntent);
 		return true;
 	}
+	
+	/**
+	 * Dialog for cab information and their number which can be called from application.
+	 */
+	private void createDialogForCabs() {
+		final Dialog dialog = new Dialog(ClubInformation.this);
+		// Include cabdialog.xml file
+		dialog.setContentView(R.layout.cabdialog);
+		// Set dialog title
+		dialog.setTitle("Nazovi taxi");
 
+		// set values for custom dialog components - text and button
+		
+		//cameo textview and button.
+		TextView tvCameo = (TextView) dialog.findViewById(R.id.tVCameo);
+		tvCameo.setText("Cameo: 6kn/km");
+
+		Button callCameo = (Button) dialog.findViewById(R.id.bCameo);
+		callCameo.setOnClickListener(this);
+
+		//RadioTaxi textview and button.
+		TextView tvRadioTaxi = (TextView) dialog
+				.findViewById(R.id.tVRadioTaxi);
+		tvRadioTaxi.setText("Radio Taxi: 4,90kn/km");
+
+		Button callRadioTaxi = (Button) dialog
+				.findViewById(R.id.bRadioTaxi);
+		callRadioTaxi.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+		
+		//EcoTaxi textview and button.
+		TextView tvEcoTaxi = (TextView) dialog
+				.findViewById(R.id.tVEcoTaxi);
+		tvEcoTaxi.setText("Radio Taxi: 5,50kn/km");
+
+		Button callEcoTaxi = (Button) dialog
+				.findViewById(R.id.bEcoTaxi);
+		callEcoTaxi.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+
+		//Exit dialog.
+		Button cancel = (Button) dialog.findViewById(R.id.bCancel);
+		cancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.cancel();
+			}
+		});
+
+		//Create dialog.
+		dialog.show();
+		
+	}
+	
+	/**
+	 * Fill map with club Urls.
+	 */
+	private void populateMapOfClubURls() {
+		
+		String Galery = "http://gallery.hr/upcoming-events/";
+		String Lemon = "http://lemon.hr/hr/";
+		String Hard_Place = "http://www.hardplace.hr/";
+		String KSET = "https://www.kset.org/arhiva/dogadaji/";
+		String Plaza_Bar = "http://www.plazabar.hr/program";
+		String Aquarius = "http://www.aquarius.hr/program/";
+
+		mapOfClubUrls.put("Galery", Galery);
+		mapOfClubUrls.put("Lemon", Lemon);
+		mapOfClubUrls.put("Hard_Place", Hard_Place);
+		mapOfClubUrls.put("KSET", KSET);
+		mapOfClubUrls.put("Plaza_Bar", Plaza_Bar);
+		mapOfClubUrls.put("Aquarius", Aquarius);
+		
+	}
+
+	/**
+	 * Async task for parsing DOM of URL pages and returning events and date when they will occur.
+	 * @author GoranLaptop
+	 *
+	 */
 	private class Events extends AsyncTask<Void, Void, Void> {
 
 		String Event;
@@ -171,10 +216,9 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 			if (clubName.equals("Galery")) {
 				try {
 					// Connect to the web site
-					Document document = Jsoup.connect(urlGalery).get();
+					Document document = Jsoup.connect(mapOfClubUrls.get(clubName)).get();
 					// Using Elements to get the Meta data
-					Elements description = document.select(
-							"h1[class=entry-head]").select("a");
+					Elements description = document.select("h1[class=entry-head]").select("a");
 					// Get the html document title
 					Event = description.attr("title");
 					clubEventList.add(Event);
@@ -187,7 +231,7 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 			} else if (clubName.equals("Lemon")) {
 				try {
 					// Connect to the web site
-					Document document = Jsoup.connect(urlLemon).get();
+					Document document = Jsoup.connect(mapOfClubUrls.get(clubName)).get();
 					Elements description = document
 							.select("div[class=vijesti_paragraf_bar]");
 					for (int i = 0; i < description.size(); i++) {
@@ -204,10 +248,10 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			} else if (clubName.equals("Hard Place")) {
+			} else if (clubName.equals("Hard_Place")) {
 				try {
 					// Connect to the web site
-					Document document = Jsoup.connect(urlHard_Place).get();
+					Document document = Jsoup.connect(mapOfClubUrls.get(clubName)).get();
 
 					Elements description = document.select(
 							"div[class=description]").select("span");
@@ -224,7 +268,7 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 			} else if (clubName.equals("KSET")) {
 				try {
 					// Connect to the web site
-					Document document = Jsoup.connect(urlKSET).get();
+					Document document = Jsoup.connect(mapOfClubUrls.get(clubName)).get();
 					Elements description = document
 							.select("td[class=archive-title]");
 					
@@ -239,10 +283,10 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 					e.printStackTrace();
 				}
 			}
-			else if (clubName.equals("Plaza Bar")) {
+			else if (clubName.equals("Plaza_Bar")) {
 				try {
 					// Connect to the web site
-					Document document = Jsoup.connect(urlPlaza_Bar).get();
+					Document document = Jsoup.connect(mapOfClubUrls.get(clubName)).get();
 
 					Elements description = document
 							.select("div[class=article]");
@@ -261,7 +305,7 @@ public class ClubInformation extends ActionBarActivity implements OnClickListene
 			else if (clubName.equals("Aquarius")) {
 				try {
 					// Connect to the web site
-					Document document = Jsoup.connect(urlAquarius).get();
+					Document document = Jsoup.connect(mapOfClubUrls.get(clubName)).get();
 
 					Elements description = document
 							.select("li").select("div").select("a");

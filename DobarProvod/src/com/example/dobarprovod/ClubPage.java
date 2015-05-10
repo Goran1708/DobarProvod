@@ -1,5 +1,8 @@
 package com.example.dobarprovod;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +11,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 @SuppressLint({ "NewApi", "SetJavaScriptEnabled" })
 public class ClubPage extends ActionBarActivity {
 	
 	static String clubName;
 	WebView clubPage;
+	static Map<String, String> mapOfClubUrls = new HashMap<String, String>();
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -21,37 +26,29 @@ public class ClubPage extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.club_page);
+		
 		if (getIntent().getExtras() != null) {
 			clubName = getIntent().getExtras().getString("clubName");
+			setTitle(clubName);
 		}
-		setTitle(clubName);
+		
+		populateMapOfClubURls();
+		
 		initializeVariables();
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
-	
+
 	private void initializeVariables() {
 		clubPage = (WebView) findViewById(R.id.webVClubPage);
 		WebSettings webSettings = clubPage.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-		if(clubName.equals("Galery")) {
-			clubPage.loadUrl("http://gallery.hr/upcoming-events/");
+		
+		if(clubName != null && !clubName.isEmpty()) {
+			clubPage.loadUrl(mapOfClubUrls.get(clubName));
 			setContentView(clubPage);
-		} else if(clubName.equals("Lemon")) {
-			clubPage.loadUrl("http://lemon.hr/hr/");
-			setContentView(clubPage);
-		} else if(clubName.equals("Hard Place")) {
-			clubPage.loadUrl("http://www.hardplace.hr/");
-			setContentView(clubPage);
-		} else if(clubName.equals("KSET")) {
-			clubPage.loadUrl("https://www.kset.org/arhiva/dogadaji/");
-			setContentView(clubPage);
-		} else if(clubName.equals("Plaza Bar")) {
-			clubPage.loadUrl("http://www.plazabar.hr/program");
-			setContentView(clubPage);
-		} else if(clubName.equals("Aquarius")) {
-			clubPage.loadUrl("http://www.aquarius.hr/program/");
-			setContentView(clubPage);
+		} else {
+            Toast.makeText(getApplicationContext(), "No link to web page!", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -62,6 +59,22 @@ public class ClubPage extends ActionBarActivity {
 		startActivity(localIntent);
 		return true;
 	}
-
 	
+	private void populateMapOfClubURls() {
+
+		String Galery = "http://gallery.hr/upcoming-events/";
+		String Lemon = "http://lemon.hr/hr/";
+		String Hard_Place = "http://www.hardplace.hr/";
+		String KSET = "https://www.kset.org/arhiva/dogadaji/";
+		String Plaza_Bar = "http://www.plazabar.hr/program";
+		String Aquarius = "http://www.aquarius.hr/program/";
+
+		mapOfClubUrls.put("Galery", Galery);
+		mapOfClubUrls.put("Lemon", Lemon);
+		mapOfClubUrls.put("Hard_Place", Hard_Place);
+		mapOfClubUrls.put("KSET", KSET);
+		mapOfClubUrls.put("Plaza_Bar", Plaza_Bar);
+		mapOfClubUrls.put("Aquarius", Aquarius);
+		
+	}
 }

@@ -37,11 +37,16 @@ public class MainActivity extends ActionBarActivity {
 		listOfForeignClubs.setAdapter(foreignClubAdapter);
 	}
 
+	/**
+	 * Creates tabhost at top of screen, fills it with tabs and fills the tabs with listView items.
+	 */
 	private void initializeVariables() {
 		
 		typeOfMusic = (TabHost) findViewById(android.R.id.tabhost);
 		typeOfMusic.setup();
 
+		/** Creates tab for Domestic music and onClickListener. */
+		
 		TabSpec specs = typeOfMusic.newTabSpec("Domestic music");
 		specs.setContent(R.id.tab1);
 		specs.setIndicator("Domestic music");
@@ -59,6 +64,8 @@ public class MainActivity extends ActionBarActivity {
 					}
 				});
 
+		/** Creates tab for Alternative music and onClickListener. */
+		
 		specs = typeOfMusic.newTabSpec("Alternative music");
 		specs.setContent(R.id.tab2);
 		specs.setIndicator("Alternative music");
@@ -76,6 +83,8 @@ public class MainActivity extends ActionBarActivity {
 					}
 				});
 
+		/** Creates tab for Foreign music and onClickListener. */
+		
 		specs = typeOfMusic.newTabSpec("Foreign music");
 		specs.setContent(R.id.tab3);
 		specs.setIndicator("Foreign music");
@@ -94,14 +103,17 @@ public class MainActivity extends ActionBarActivity {
 				});
 	}
 
+	/**
+	 * Fills list with name of clubs for listViews and adapters.
+	 */
 	private void addClubs() {
 		domesticClubs.add("Galery");
 		domesticClubs.add("Lemon");
 
-		alternativeClubs.add("Hard Place");
+		alternativeClubs.add("Hard_Place");
 		alternativeClubs.add("KSET");
 
-		foreignClubs.add("Plaza Bar");
+		foreignClubs.add("Plaza_Bar");
 		foreignClubs.add("Aquarius");
 	}
 
